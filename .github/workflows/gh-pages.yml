@@ -19,9 +19,9 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Build
-        run: yarn build-main
-        run: ls -la
+#      - name: Build
+#        run: yarn build-main
+#        run: ls -la
         
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
