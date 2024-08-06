@@ -8,6 +8,11 @@ on:
       - main  # Set a branch that will trigger a deployment
   pull_request:
 
+permissions:
+  id-token: write
+  pages: write
+  contents: write
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
