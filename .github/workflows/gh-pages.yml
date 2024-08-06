@@ -1,7 +1,8 @@
 
-name: github pages
+name: build
 
 on:
+  workflow_dispatch:
   push:
     branches:
       - main  # Set a branch that will trigger a deployment
@@ -9,12 +10,10 @@ on:
 
 jobs:
   deploy:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-        with:
-          submodules: true  # Fetch themes (true OR recursive)
-          fetch-depth: 0    # Fetch all history for .GitInfo and .Lastmod
+      - name: Checkout
+        uses: actions/checkout@v4
 
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
@@ -22,3 +21,9 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./dist/main
+
+      - name: Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: latest
+          files: build.tgz
